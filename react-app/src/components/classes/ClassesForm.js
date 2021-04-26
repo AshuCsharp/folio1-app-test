@@ -7,26 +7,19 @@ import * as dataApi from '../../api/dataApi';
 class ClassesForm extends React.Component {
     constructor(props) {
         super(props);
-        let id = null,
-            cname = "",
-            location = "",
-            fname = "",
-            lname = "",
-            sal = ""
-
-
+        //state fields will always hold one object/record
         this.state = {
             fields: {},
             errors: {}
-
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
     componentDidMount() {
+        //this code will get all the classes from db and then will get the 
+        //details of the single class and add the object in Fields.
 
         let id = parseInt(this.props.id);
         if (!isNaN(id)) {
@@ -41,14 +34,13 @@ class ClassesForm extends React.Component {
         }
     }
 
-
-
     handleChange(field, e) {
         let fields = this.state.fields;
         fields[field] = e.target.value;
         this.setState({ fields });
     }
 
+    //this is form validaion Block
     handleSubmit(event) {
         let fields = this.state.fields;
         let errors = {};
@@ -79,36 +71,31 @@ class ClassesForm extends React.Component {
             formIsValid = false;
             errors["name"] = "Cannot be empty";
         }
-
-
         return formIsValid;
-
     }
-
-
 
     contactSubmit(e) {
         e.preventDefault();
-
-        if (this.state.fields.id > 0) {
-            //edit code
-        }
-        else {
-
-            if (this.handleSubmit()) {
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 'folioClass': this.state.fields })
-                };
-                console.log(JSON.stringify({ 'folioClass': this.state.fields }));
-
-                fetch('http://localhost:55217/api/folioclasses', requestOptions)
-                    .then(response => response.json());
-            } else {
-                alert("Form has errors.")
-            }
-        }
+        const formData = this.state.fields;
+        if(formData.id === 'undefined'){
+            //case of add
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            };
+            fetch('https://6079395e460a6600174fb472.mockapi.io/api/v1/folioclasses', requestOptions)
+                        .then(response => response.json());
+        }else{
+            //case of edit
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            };
+            fetch('https://6079395e460a6600174fb472.mockapi.io/api/v1/folioclasses/' + formData.id, requestOptions)
+                        .then(response => response.json());            
+        }                           
     }
 
     render() {
