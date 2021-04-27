@@ -34,9 +34,9 @@ namespace folio1_app_test.Services
         {
             if (!dbContext.FolioClasses.Any())
             {
-                dbContext.FolioClasses.Add(new FolioClassDB() { id = 1, cname = "UI/UX", location = "Building 5 Room 501", fname = "Johnson", lname = "Johnson1", sal="Mr" });
-                dbContext.FolioClasses.Add(new FolioClassDB() { id = 2, cname = "DevOps", location = "Building 2 Room 201", fname = "Thomson", lname = "Johnson1", sal = "Mr" });
-                dbContext.FolioClasses.Add(new FolioClassDB() { id = 3, cname = "Azure", location = "Building 3 Room 301", fname = "ABX", lname = "Johnson1", sal = "Mr" });
+                dbContext.FolioClasses.Add(new FolioClassDB() { id = 1, cname = "UI/UX", location = "Building 5 Room 501", fname = "Johnson", lname = "John", sal="Mr" });
+                dbContext.FolioClasses.Add(new FolioClassDB() { id = 2, cname = "DevOps", location = "Building 2 Room 201", fname = "Thomson", lname = "Doe", sal = "Mr" });
+                dbContext.FolioClasses.Add(new FolioClassDB() { id = 3, cname = "Azure", location = "Building 3 Room 301", fname = "ABX", lname = "Smith", sal = "Mr" });
                 dbContext.FolioClasses.Add(new FolioClassDB() { id = 4, cname = ".Net Core", location = "Building 6 Room 602", fname = "xyz", lname = "Johnson1", sal = "Mr" });
                 dbContext.SaveChanges();
             }
