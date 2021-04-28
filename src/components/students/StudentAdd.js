@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import * as dataApi from '../../api/dataApi';
 
 
@@ -27,23 +27,21 @@ class StudentAdd extends React.Component {
 
         let id = parseInt(this.props.match.params.id);
         //lnamedata will hold the student data 
+
         dataApi.getStudentList().then((result) => {
-            this.setState({ lnamedata: result }); //.item1
+            this.setState({ lnamedata: this.result }); //.item1
         });
+
         dataApi.getClassList().then((result) => {
-            this.setState(() => {
-                return { classList: result }
-            }); //.item1
+            this.setState({ classList: this.result }); //.item1
         });
+
         if (!isNaN(id)) {
             //this is the case of edit
             try {
-
-
                 this.setState({ fields: this.state.lnamedata.find(element => element.id === id) }); //item1 need to me removed. result wil hold the object that user is modifying 
-
             } catch (error) {
-
+                    console.log(error);
             }
         }
     }
@@ -67,7 +65,7 @@ class StudentAdd extends React.Component {
             errors["fname"] = "Cannot be empty";
         }
 
-       
+
 
 
 
@@ -78,6 +76,7 @@ class StudentAdd extends React.Component {
 
                 let id = parseInt(this.props.match.params.id);
                 if (!isNaN(id)) {
+                    /* eslint-disable */
                     let oldlname = this.state.lnamedata.find(element => parseInt(element.id) === id)
                     if (oldlname.lname.toUpperCase() !== fields["lname"].toUpperCase()) {
                         if (this.state.lnamedata.find(e => { (e.lname.toUpperCase()) === fields["lname"].toUpperCase() })) {
@@ -88,6 +87,7 @@ class StudentAdd extends React.Component {
                         }
                     }
                 } else {
+                    /* eslint-disable */
                     if (typeof (state.lnamedata) !== 'undefined') {
                         if (this.state.lnamedata.find(e => { (e.lname.toUpperCase()) === fields["lname"].toUpperCase() })) {
                             formIsValid = false;
@@ -104,7 +104,7 @@ class StudentAdd extends React.Component {
             formIsValid = false;
             errors["lname"] = "Cannot be empty";
         } else {
-            //handleNameCondition();
+            handleNameCondition();
         }
 
 
@@ -139,7 +139,7 @@ class StudentAdd extends React.Component {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ formData })
                 };
-               
+
 
                 fetch('https://6079395e460a6600174fb472.mockapi.io/api/v1/Students', requestOptions)
                     .then(response => response.json());
@@ -149,13 +149,14 @@ class StudentAdd extends React.Component {
         }
         else {
             //case of edit
+            let id = parseInt(this.props.match.params.id);
             if (this.handleSubmit()) {
                 const requestOptions = {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ formData })
                 };
-       
+
 
                 fetch('https://6079395e460a6600174fb472.mockapi.io/api/v1/Students/' + id, requestOptions)
                     .then(response => response.json());

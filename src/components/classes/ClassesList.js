@@ -12,7 +12,7 @@ class ClassesList extends React.Component {
 
     getClasslst = () => {
         dataApi.getClassList().then((result) => {
-            this.setState({ isLoaded: true, items: result }); //item1
+            this.setState({ items: result }); //item1
         });
     }
 
@@ -42,9 +42,9 @@ class ClassesList extends React.Component {
         this.setState({ rid: id });
     }
 
-    handleEdit(id) {
-        alert(id);
-    }
+    //handleEdit(id) {
+      //  alert(id);
+    //}
 
     handleSortClick(fldName) {
 
@@ -61,11 +61,12 @@ class ClassesList extends React.Component {
 
     render() {
 
-        let { error, isLoaded, items } = this.state;
+        let { error, items } = this.state;
         if (error) {
             return (
                 <div>
                     <p>
+                        
                         Error: {error}
                     </p>
                 </div>

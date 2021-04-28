@@ -92,8 +92,9 @@ class ClassesForm extends React.Component {
     }
 
     contactSubmit(e) {
-      debugger;
+      
         e.preventDefault();
+        let id = parseInt(this.props.id);
         const formData = this.state.fields;
         if (typeof (formData.id) === 'undefined') {
           if (this.handleSubmit()) {
@@ -102,8 +103,7 @@ class ClassesForm extends React.Component {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
-            };
-         
+            };         
 
             fetch('https://6079395e460a6600174fb472.mockapi.io/api/v1/folioclasses', requestOptions)
                 .then(response => response.json())
@@ -115,9 +115,7 @@ class ClassesForm extends React.Component {
                 }
           }else{
             alert(JSON.stringify(this.state.errors));
-          }
-                
-          
+          }      
 
         }
         else {

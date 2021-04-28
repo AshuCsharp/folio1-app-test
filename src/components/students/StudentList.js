@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as dataApi from '../../api/dataApi';
 
 class StudentList extends React.Component {
@@ -8,11 +8,6 @@ class StudentList extends React.Component {
     this.state = { error: null, isLoaded: false, items: [] };
   }
 
-  getStudentlst = () => {
-    dataApi.getStudentList().then((result) => {
-      this.setState({ isLoaded: true, items: result }); //item1
-    });
-  }
 
   deleteStudent(id) {
     let array = [...this.state.items]; // make a separate copy of the array
@@ -23,20 +18,18 @@ class StudentList extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidCatch() {
     try {
-      getStudentlst();
-    } catch {
+      dataApi.getStudentList().then((result) => {
+        this.setState({ items: result }); //item1
+      });
+    } catch (error) {
       this.setState({ error: true });
     }
   }
 
-
-
-
-
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { items } = this.state;
 
     if (this.state.items.length === 0) {
       return (
