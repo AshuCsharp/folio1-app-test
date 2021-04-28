@@ -46,17 +46,7 @@ class ClassesList extends React.Component {
       //  alert(id);
     //}
 
-    handleSortClick(fldName) {
-
-        this.setState({
-            items: this.state.items.sort(function (a, b) {
-                if (a > b)
-                    return ('' + a.cname).localeCompare(b.cname)
-                if (a < b)
-                    return ('' + b.cname).localeCompare(a.cname)
-            })
-        });
-    }
+ 
 
 
     render() {
@@ -79,8 +69,8 @@ class ClassesList extends React.Component {
                     <table className="table table-bordered table-sm ">
                         <thead className="thead-light">
                             <tr>
-                                <th onClick={() => this.handleSortClick("cname")} style={{ cursor: 'pointer' }}> Class Name</th>
-                                <th onClick={() => this.handleSortClick("location")} style={{ cursor: 'pointer' }}>Location</th>
+                                <th  style={{ cursor: 'pointer' }}> Class Name</th>
+                                <th  style={{ cursor: 'pointer' }}>Location</th>
                                 <th>Teacher Name</th>
                                 <th></th>
                                 <th></th>
@@ -89,7 +79,7 @@ class ClassesList extends React.Component {
                         <tbody>
                             {
                                 items.map(el => (
-                                    <tr scope="row" key={el.id}>
+                                    <tr  key={el.id}>
                                         <td onClick={() => this.handleClick(el.id)} style={{ cursor: 'pointer' }}>
                                             {el.cname}
                                         </td>
@@ -113,14 +103,14 @@ class ClassesList extends React.Component {
                                     </tr>
                                 ))
                             }
-                            <tr scope="row">
+                            <tr>
                                 <td colSpan="5">
                                     {this.state.redirectToAddClassPage && <Redirect to="/classmanagement" />}
                                     <button className="btn btn-light" type="button" onClick={() => this.setState({ redirectToAddClassPage: true })} >Add Class</button>
 
                                 </td>
                             </tr>
-                            <tr scope="row">
+                            <tr >
                                 <td colSpan="5">
                                     {this.state.rid > 0 ? <StudentList rowId={this.state.rid} /> : " "}
                                 </td>

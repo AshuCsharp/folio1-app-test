@@ -166,9 +166,9 @@ class ClassesForm extends React.Component {
                         <td>
                             <select name="sal" onChange={this.handleChange.bind(this, "sal")}>
                                 <option value="Select">Select</option>
-                                <option selected={this.state.fields["sal"] == "Mr"} value="Mr">Mr</option>
-                                <option selected={this.state.fields["sal"] == "Miss"} value="Miss">Miss</option>
-                                <option selected={this.state.fields["sal"] == "Dr"} value="Dr">Dr</option>
+                                <option selected={this.state.fields["sal"] === "Mr"} value="Mr">Mr</option>
+                                <option selected={this.state.fields["sal"] === "Miss"} value="Miss">Miss</option>
+                                <option selected={this.state.fields["sal"] === "Dr"} value="Dr">Dr</option>
                             </select>
                         </td>
                     </tr>
