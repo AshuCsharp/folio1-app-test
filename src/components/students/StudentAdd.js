@@ -169,10 +169,12 @@ class StudentAdd extends React.Component {
 
 
     render() {
-        let _state = this.state;
-        const classOptions = this.state.classList.map(function (element) {
-            return <option value={element.id} selected={element.id == _state.fields["folioClassId"]} >{element.cname}</option>;
-        });
+        {if( parseInt(this.props.match.params.id) > 0)
+           { let _state = this.state;}
+            const classOptions = this.state.classList.map(function (element) {
+                return <option value={element.id} selected={element.id == _state.fields["folioClassId"]} >{element.cname}</option>;
+            });
+        }
         return (
 
             <form onSubmit={this.contactSubmit.bind(this)}>

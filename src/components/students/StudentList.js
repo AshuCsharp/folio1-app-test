@@ -18,7 +18,7 @@ class StudentList extends React.Component {
     }
   }
 
-  componentDidCatch() {
+  componentDidMount() {
     try {
       dataApi.getStudentList().then((result) => {
         this.setState({ items: result }); //item1
